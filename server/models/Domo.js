@@ -1,6 +1,3 @@
-const models = require('../models');
-const Domo = models.Domo;
-
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
@@ -52,4 +49,4 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
 DomoModel = mongoose.model('Domo', DomoSchema);
 
 module.exports.DomoModel = DomoModel;
-module.exports.DomoSchema = DomoSchema
+module.exports.DomoSchema = DomoSchema;
