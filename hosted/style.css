@@ -50,7 +50,7 @@ nav:nth-child(1) {
 .domoForm {
     border: 2px solid #338acc;
     height: 35px;
-    width: 700px;
+    width: 800px;
     margin-top:0px;
     padding-top:10px;
     background-color: #55acee;
@@ -205,17 +205,27 @@ nav:nth-child(1) {
     margin-bottom: 2px;
     border: 2px solid #55acee;
     border-radius: 4px;
-    background-color: #55acee;
+    /*background-color: #55acee;*/
     padding: 10px;
     min-height:60px;
     overflow: hidden;
 }
 
+.domo img{
+	transition: box-shadow .5s ease-out;
+    box-shadow: none;
+}
+
 .domo:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
+}
+
+.domo:hover img{
+	transition: box-shadow .2s ease-out,
+				border-radius 1.2s ease-out;
+    box-shadow: 0px 0px 4px 4px #55acee;
+    border-radius: 50px;
 }
 
 img.domoFace {
@@ -242,6 +252,10 @@ h3.domoName {
     font-weight: bold;
     padding-left: 65px;
     font-size: 1.5em;
+	color: white;
+	text-shadow: 
+				0px 3px 15px black,
+				0px 2px 2px black;
 }
 
 h3.domoAge {
@@ -251,6 +265,10 @@ h3.domoAge {
     font-weight: bold;
     padding-right: 40px;
     font-size: 1.5em;
+	color: white;
+	text-shadow: 
+				0px 3px 15px black,
+				0px 2px 2px black;
 }
 
 .domo:first-child {
@@ -259,4 +277,42 @@ h3.domoAge {
 
 .domo:last-child {
     margin-bottom:10px;
+}
+
+#faq{
+	width: 60%;
+    min-width: 1000px;
+    border: 2px solid #55acee;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.question{
+	width: 95%;
+    margin: 0 auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 2px solid #55acee;
+    border-radius: 4px;
+    background-color: #55acee;
+    min-height:60px;
+    overflow: hidden;
+}
+
+h4{
+	width: 495px;
+    font-weight: bold;
+    padding-left: 65px;
+    font-size: 1.5em;
+	float: left;
+}
+
+h5{
+    float:right;
+    text-align: left;
+    width: 400px;
+    font-weight: bold;
+    padding-right: 40px;
+    font-size: 1.2em;
 }

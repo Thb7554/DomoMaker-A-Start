@@ -29,7 +29,10 @@ const signup = (request, response) => {
 
     const savePromise = newAccount.save();
 
-    savePromise.then(() => res.json({ redirect: '/maker' }));
+    savePromise.then(() => {
+      req.session.account = Account.AccountModel.toAPI(newAccount);
+      return res.json({ redirect: '/maker' });
+    });
 
     savePromise.catch((err) => {
       console.log(err);
@@ -45,14 +48,15 @@ const signup = (request, response) => {
 
 
 const loginPage = (req, res) => {
-  res.render('login');
+  res.render('login', { csrfToken: req.csrfToken() });
 };
 
-const signupPage = (req, res) => {
-  res.render('signup');
+const faqPage = (req, res) => {
+  res.render('faq', { csrfToken: req.csrfToken() });
 };
 
 const logout = (req, res) => {
+  req.session.destroy();
   res.redirect('/');
 };
 
@@ -72,13 +76,26 @@ const login = (request, response) => {
       return res.status(401).json({ error: 'Wrong username or password' });
     }
 
+    req.session.account = Account.AccountModel.toAPI(account);
+
     return res.json({ redirect: '/maker' });
   });
 };
 
+const getToken = (request, response) => {
+  const req = request;
+  const res = response;
+
+  const csrfJSON = {
+    csrfToken: req.csrfToken(),
+  };
+
+  res.json(csrfJSON);
+};
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;
+module.exports.faqPage = faqPage;
 module.exports.logout = logout;
-module.exports.signupPage = signupPage;
 module.exports.signup = signup;
+module.exports.getToken = getToken;
