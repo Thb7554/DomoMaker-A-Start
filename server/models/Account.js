@@ -28,6 +28,10 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  money:{
+	type: Number,
+    required: true,
+  },
 });
 
 AccountSchema.statics.toAPI = doc => ({

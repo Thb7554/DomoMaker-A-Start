@@ -9,6 +9,7 @@ const signup = (request, response) => {
   req.body.username = `${req.body.username}`;
   req.body.pass = `${req.body.pass}`;
   req.body.pass2 = `${req.body.pass2}`;
+  
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
     return res.status(400).json({ error: 'RAWR! All fields are required' });
@@ -23,6 +24,7 @@ const signup = (request, response) => {
       username: req.body.username,
       salt,
       password: hash,
+	  money: 10,
     };
 
     const newAccount = new Account.AccountModel(accountData);

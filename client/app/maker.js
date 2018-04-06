@@ -7,7 +7,7 @@ const handleDomo = (e) => {
 		handleError("RAWR! All fields are required");
 		return false;
 	}
-
+	
 	sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
 		loadDomosFromServer();
 	});
