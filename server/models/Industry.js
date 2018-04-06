@@ -70,7 +70,8 @@ IndustrySchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertID(ownerId),
   };
 
-  return IndustryModel.find(search).select('name resource resourceAmount level levelUpCost levelUpScaling').exec(callback);
+  return IndustryModel.find(search).select(
+  'name resource resourceAmount level levelUpCost levelUpScaling').exec(callback);
 };
 
 IndustryModel = mongoose.model('Industry', IndustrySchema);

@@ -24,7 +24,7 @@ const signup = (request, response) => {
       username: req.body.username,
       salt,
       password: hash,
-	  money: 10,
+      money: 10,
     };
 
     const newAccount = new Account.AccountModel(accountData);
