@@ -28,8 +28,8 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  money:{
-	type: Number,
+  money: {
+    type: Number,
     required: true,
   },
 });

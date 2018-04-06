@@ -1,109 +1,104 @@
 "use strict";
 
-var handleDomo = function handleDomo(e) {
+var handleIndustry = function handleIndustry(e) {
 	e.preventDefault();
 
-	$("#domoMessage").animate({ width: 'hide' }, 350);
+	$("#industryMessage").animate({ width: 'hide' }, 350);
 
-	if ($("#domoName").val() == '' || $("#domoAge").val() == '') {
+	if ($("#industryName").val() == '') {
 		handleError("RAWR! All fields are required");
 		return false;
 	}
 
-	sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function () {
-		loadDomosFromServer();
+	sendAjax('POST', $("#industryForm").attr("action"), $("#industryForm").serialize(), function () {
+		loadIndustriesFromServer();
 	});
 
 	return false;
 };
 
-var DomoForm = function DomoForm(props) {
+var IndustryForm = function IndustryForm(props) {
 	return React.createElement(
 		"form",
-		{ id: "domoForm",
-			onSubmit: handleDomo,
-			name: "domoForm",
+		{ id: "industryForm",
+			onSubmit: handleIndustry,
+			name: "industryForm",
 			action: "/maker",
 			method: "POST",
-			className: "domoForm"
+			className: "industryForm"
 		},
 		React.createElement(
 			"label",
 			{ htmlFor: "name" },
 			"Name: "
 		),
-		React.createElement("input", { id: "domoName", type: "text", name: "name", placeholder: "Domo Name" }),
+		React.createElement("input", { id: "industryName", type: "text", name: "name", placeholder: "Industry Name" }),
+		React.createElement(
+		"select", 
+		{ id: "industryProduction"
+		},
+			React.createElement("option", {value: "Wood"}, "Wood"),
+			React.createElement("option", {value: "Steel"}, "Steel"),
+			React.createElement("option", {value: "Power"}, "Power")
+		),
 		React.createElement(
 			"label",
-			{ htmlFor: "age" },
-			"Age: "
+			{ htmlFor: "production" },
+			"Production: "
 		),
-		React.createElement("input", { id: "domoAge", type: "text", name: "age", placeholder: "Domo Age" }),
-		React.createElement(
-			"label",
-			{ htmlFor: "color" },
-			"Color: "
-		),
-		React.createElement("input", { id: "domoColor", type: "color", name: "color" }),
 		React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
-		React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Make Domo" })
+		React.createElement("input", { className: "makeIndustrySubmit", type: "submit", value: "Make Industry" })
 	);
 };
 
-var DomoList = function DomoList(props) {
-	if (props.domos.length === 0) {
+var IndustryList = function IndustryList(props) {
+	if (props.industries.length === 0) {
 		return React.createElement(
 			"div",
-			{ className: "domoList" },
+			{ className: "industryList" },
 			React.createElement(
 				"h3",
-				{ className: "emptyDomo" },
-				"No Domos yet"
+				{ className: "emptyIndustry" },
+				"No Industries yet"
 			)
 		);
 	}
 	//#603912
-	var domoNodes = props.domos.map(function (domo) {
+	var industryNodes = props.industries.map(function (industry) {
 		return React.createElement(
 			"div",
-			{ key: domo._id, className: "domo", style: { backgroundColor: domo.color } },
-			React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "domo face", className: "domoFace" }),
+			{ key: industry._id, className: "industry", style: { backgroundColor: industry.color } },
+			React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "industry face", className: "industryFace" }),
 			React.createElement(
 				"h3",
-				{ className: "domoName" },
+				{ className: "industryName" },
 				" Name: ",
-				domo.name,
+				industry.name,
 				" "
 			),
-			React.createElement(
-				"h3",
-				{ className: "domoAge" },
-				" Age:",
-				domo.age,
-				" "
-			)
+			"//",
 		);
 	});
 
 	return React.createElement(
 		"div",
-		{ className: "domolist" },
-		domoNodes
+		{ className: "industrylist" },
+		industryNodes
 	);
 };
 
-var loadDomosFromServer = function loadDomosFromServer() {
-	sendAjax('GET', '/getDomos', null, function (data) {
-		ReactDOM.render(React.createElement(DomoList, { domos: data.domos }), document.querySelector("#domos"));
+var loadIndustriesFromServer = function loadIndustriesFromServer() {
+	sendAjax('GET', '/getIndustries', null, function (data) {
+		ReactDOM.render(React.createElement(IndustryList, { industries: data.industries }), document.querySelector("#industries"));
 	});
 };
 
 var setup = function setup(csrf) {
-	ReactDOM.render(React.createElement(DomoForm, { csrf: csrf }), document.querySelector("#makeDomo"));
+	ReactDOM.render(React.createElement(IndustryForm, { csrf: csrf }), document.querySelector("#makeIndustry"));
 
-	ReactDOM.render(React.createElement(DomoList, { domos: [] }), document.querySelector("#domos"));
+	ReactDOM.render(React.createElement(IndustryList, { industries: [] }), document.querySelector("#industries"));
 
-	loadDomosFromServer();
+	loadIndustriesFromServer();
 };
 
 var getToken = function getToken() {
@@ -119,11 +114,11 @@ $(document).ready(function () {
 
 var handleError = function handleError(message) {
 	$("#errorMessage").text(message);
-	$("#domoMessage").animate({ width: 'toggle' }, 350);
+	$("#industryMessage").animate({ width: 'toggle' }, 350);
 };
 
 var redirect = function redirect(response) {
-	$("#domoMessage").animate({ width: 'hide' }, 350);
+	$("#industryMessage").animate({ width: 'hide' }, 350);
 	window.location = response.redirect;
 };
 

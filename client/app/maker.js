@@ -1,85 +1,82 @@
-const handleDomo = (e) => {
+const handleIndustry = (e) => {
 	e.preventDefault();
 	
-	$("#domoMessage").animate({width:'hide'},350);
+	$("#industryMessage").animate({width:'hide'},350);
 	
-	if($("#domoName").val() == '' || $("#domoAge").val() == ''){
+	if($("#industryName").val() == ''){
 		handleError("RAWR! All fields are required");
 		return false;
 	}
 	
-	sendAjax('POST', $("#domoForm").attr("action"), $("#domoForm").serialize(), function(){
-		loadDomosFromServer();
+	sendAjax('POST', $("#industryForm").attr("action"), $("#industryForm").serialize(), function(){
+		loadIndustriesFromServer();
 	});
 	
 	return false;
 }
 
-const DomoForm = (props) => {
+const IndustryForm = (props) => {
 	return (
-		<form id="domoForm"
-			  onSubmit={handleDomo}
-			  name="domoForm"
+		<form id="industryForm"
+			  onSubmit={handleIndustry}
+			  name="industryForm"
 			  action="/maker"
 			  method="POST"
-			  className="domoForm"
+			  className="industryForm"
 		>
 			<label htmlFor="name">Name: </label>
-			<input id="domoName" type="text" name="name" placeholder="Domo Name"/>
-			<label htmlFor="age">Age: </label>
-			<input id="domoAge" type="text" name="age" placeholder="Domo Age"/>
-			<label htmlFor="color">Color: </label>
-			<input id="domoColor" type="color" name="color"/>
+			<input id="industryName" type="text" name="name" placeholder="Industry Name"/>
+			<label htmlFor="Type">Type: </label>
 			<input type="hidden" name="_csrf" value={props.csrf} />
-			<input className="makeDomoSubmit" type="submit" value="Make Domo"/>
+			<input className="makeIndustrySubmit" type="submit" value="Make Industry"/>
 		</form>
 	);
 };
 
-const DomoList = function(props){
-	if(props.domos.length === 0){
+const IndustryList = function(props){
+	if(props.industries.length === 0){
 		return(
-			<div className="domoList">
-				<h3 className="emptyDomo">No Domos yet</h3>
+			<div className="industryList">
+				<h3 className="emptyIndustry">No Industries yet</h3>
 			</div>
 		);
 	}
 	//#603912
-	const domoNodes = props.domos.map(function(domo){
+	const industryNodes = props.industries.map(function(industry){
 		return(
-			<div key={domo._id} className="domo" style={{backgroundColor: domo.color}}>
-				<img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-				<h3 className="domoName"> Name: {domo.name} </h3>
-				<h3 className="domoAge"> Age:{domo.age} </h3>
+			<div key={industry._id} className="industry" style={{backgroundColor: industry.color}}>
+				<img src="/assets/img/domoface.jpeg" alt="industry face" className="industryFace" />
+				<h3 className="industryName"> Name: {industry.name} </h3>
+				//<h3 className="domoAge"> Age:{domo.age} </h3>
 			</div>
 		);
 	});
 	
 	return(
-		<div className="domolist">
-			{domoNodes}
+		<div className="industrylist">
+			{industryNodes}
 		</div>
 	);
 };
 
-const loadDomosFromServer = () => {
-	sendAjax('GET','/getDomos',null,(data) => {
+const loadIndustriesFromServer = () => {
+	sendAjax('GET','/getIndustries',null,(data) => {
 		ReactDOM.render(
-			<DomoList domos={data.domos} />, document.querySelector("#domos")
+			<IndustryList industries={data.industries} />, document.querySelector("#industries")
 		);
 	});
 };
 
 const setup = function(csrf) {
 	ReactDOM.render(
-		<DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+		<IndustryForm csrf={csrf} />, document.querySelector("#makeIndustry")
 	);
 	
 	ReactDOM.render(
-		<DomoList domos={[]} />, document.querySelector("#domos")
+		<IndustryList industries={[]} />, document.querySelector("#industries")
 	);
 	
-	loadDomosFromServer();
+	loadIndustriesFromServer();
 };
 
 const getToken = () => {

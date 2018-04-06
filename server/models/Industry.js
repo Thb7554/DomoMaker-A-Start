@@ -15,33 +15,33 @@ const IndustrySchema = new mongoose.Schema({
     set: setName,
   },
   resource: {
-	type: String,
-	required: true,
+    type: String,
+    required: true,
   },
   resourceAmount: {
-	type: Number,
-	min: 1,
-	required: true,
+    type: Number,
+    min: 1,
+    required: true,
   },
-  cost:{
-	type: Number,
-	min: 0,
-	required: false,
+  cost: {
+    type: Number,
+    min: 0,
+    required: false,
   },
-  level:{
-	type: Number,
-	min: 0,
-	required: true,
+  level: {
+    type: Number,
+    min: 0,
+    required: true,
   },
-  levelUpCost:{
-	type: Number,
-	min: 0,
-	required: true,
+  levelUpCost: {
+    type: Number,
+    min: 0,
+    required: true,
   },
-  levelUpScaling:{
-	type: Number,
-	min: 0,
-	required: true,
+  levelUpScaling: {
+    type: Number,
+    min: 0,
+    required: true,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -62,7 +62,7 @@ IndustrySchema.statics.toAPI = (doc) => ({
   cost: doc.cost,
   level: doc.level,
   levelUpCost: doc.levelUpCost,
-  levelUpScaling: doc.levelUpScaling
+  levelUpScaling: doc.levelUpScaling,
 });
 
 IndustrySchema.statics.findByOwner = (ownerId, callback) => {
@@ -70,7 +70,7 @@ IndustrySchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertID(ownerId),
   };
 
-  return IndustryModel.find(search).select('name color age resource resourceAmount cost level levelUpCost levelUpScaling').exec(callback);
+  return IndustryModel.find(search).select('name resource resourceAmount level levelUpCost levelUpScaling').exec(callback);
 };
 
 IndustryModel = mongoose.model('Industry', IndustrySchema);

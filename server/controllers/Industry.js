@@ -22,10 +22,10 @@ const makeIndustry = (req, res) => {
 
   const industryData = {
     name: req.body.name,
-	cost: req.body.cost,
-	level: 1,
-	levelUpCost: req.body.cost / 2,
-	levelUpScaling: 2, 
+    cost: req.body.cost,
+    level: 1,
+    levelUpCost: req.body.cost / 2,
+    levelUpScaling: 2,
     owner: req.session.account._id,
   };
 
@@ -38,7 +38,7 @@ const makeIndustry = (req, res) => {
   industryPromise.catch((err) => {
     console.log(err);
     if (err.code === 11000) {
-      //return res.status(400).json({ error: 'Domo already exists.' });
+      // return res.status(400).json({ error: 'Domo already exists.' });
     }
     return res.status(400).json({ error: 'An error occurred' });
   });

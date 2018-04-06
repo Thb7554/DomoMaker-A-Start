@@ -24,7 +24,7 @@
     "Redis",
     "Login"
   ],
-  "author": "Cody Van De Mark",
+  "author": "Taylor Bacon",
   "license": "Apache 2.0",
   "dependencies": {
     "body-parser": "^1.15.0",
@@ -46,7 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.10.1",
+    "eslint-plugin-import": "^1.16.0",
     "nodemon": "^1.11.0"
   }
 }

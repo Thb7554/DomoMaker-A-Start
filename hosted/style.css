@@ -47,7 +47,7 @@ nav:nth-child(1) {
     background-color: #66bdff;
 }
 
-.domoForm {
+.industryForm {
     border: 2px solid #338acc;
     height: 35px;
     width: 800px;
@@ -58,7 +58,7 @@ nav:nth-child(1) {
     border-top-right-radius: 4px;
 }
 
-.domoForm label {
+.industryForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
@@ -67,11 +67,11 @@ nav:nth-child(1) {
     color: white;
 }
 
-.domoForm input[type=text] {
+.industryForm input[type=text] {
     float:left;
 }
 
-.makeDomoSubmit {
+.makeIndustrySubmit {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
@@ -81,11 +81,11 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.makeIndustrySubmit:link, .makeIndustrySubmit:visited, .makeIndustrySubmit:hover, .makeIndustrySubmit:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.makeIndustrySubmit:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
 }
@@ -117,7 +117,7 @@ nav:nth-child(1) {
     margin: 0 auto;
     margin-top: 14px;
     font-size: 1.2em;
-    width: 100px;
+    width: 200px;
     background-color: #55acee;
     border-radius: 2px;
     border-color: #66acee;
@@ -147,7 +147,7 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 1px 1px #55acee;
 }
 
-#domoMessage {
+#industryMessage {
     display:none;
     top: 250px;
     width: 250px;
@@ -158,7 +158,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#industryMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -178,7 +178,7 @@ nav:nth-child(1) {
     font-style: italic;
 }
 
-#domo {
+#industry {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -189,7 +189,7 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
+#industries {
     width: 40%;
     min-width: 400px;
     border: 2px solid #55acee;
@@ -198,7 +198,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.industry {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -211,24 +211,24 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo img{
+.industry img{
 	transition: box-shadow .5s ease-out;
     box-shadow: none;
 }
 
-.domo:hover {
+.industry:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
 }
 
-.domo:hover img{
+.industry:hover img{
 	transition: box-shadow .2s ease-out,
 				border-radius 1.2s ease-out;
     box-shadow: 0px 0px 4px 4px #55acee;
     border-radius: 50px;
 }
 
-img.domoFace {
+img.industryFace {
     margin-left: 25px;
     margin-right: 10px;
     height: 50px;
@@ -238,7 +238,7 @@ img.domoFace {
     float:left;
 }
 
-h3.emptyDomo {
+h3.emptyIndustry {
     width: 400px;
     font-size: 1.5em;
     margin: 0 auto;
@@ -246,7 +246,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.industryName {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -258,7 +258,7 @@ h3.domoName {
 				0px 2px 2px black;
 }
 
-h3.domoAge {
+h3.industryAge {
     float:right;
     text-align: left;
     width: 100px;
@@ -271,11 +271,11 @@ h3.domoAge {
 				0px 2px 2px black;
 }
 
-.domo:first-child {
+.industry:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
+.industry:last-child {
     margin-bottom:10px;
 }
 
