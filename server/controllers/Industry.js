@@ -22,9 +22,11 @@ const makeIndustry = (req, res) => {
 
   const industryData = {
     name: req.body.name,
-    cost: req.body.cost,
+    cost: 0,
+	resource: req.body.resource,
+	resourceAmount: 1,
     level: 1,
-    levelUpCost: req.body.cost / 2,
+    levelUpCost: 0,
     levelUpScaling: 2,
     owner: req.session.account._id,
   };
