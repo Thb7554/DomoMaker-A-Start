@@ -34,17 +34,28 @@ var IndustryForm = function IndustryForm(props) {
 		),
 		React.createElement("input", { id: "industryName", type: "text", name: "name", placeholder: "Industry Name" }),
 		React.createElement(
-		"select", 
-		{ id: "industryProduction"
-		},
-			React.createElement("option", {value: "Wood"}, "Wood"),
-			React.createElement("option", {value: "Steel"}, "Steel"),
-			React.createElement("option", {value: "Power"}, "Power")
+			"label",
+			{ htmlFor: "Type" },
+			"Type: "
 		),
 		React.createElement(
-			"label",
-			{ htmlFor: "production" },
-			"Production: "
+			"select",
+			{ name: "resource" },
+			React.createElement(
+				"option",
+				{ value: "wood" },
+				"Wood"
+			),
+			React.createElement(
+				"option",
+				{ value: "steel" },
+				"Steel"
+			),
+			React.createElement(
+				"option",
+				{ value: "power" },
+				"Power"
+			)
 		),
 		React.createElement("input", { type: "hidden", name: "_csrf", value: props.csrf }),
 		React.createElement("input", { className: "makeIndustrySubmit", type: "submit", value: "Make Industry" })
@@ -65,10 +76,22 @@ var IndustryList = function IndustryList(props) {
 	}
 	//#603912
 	var industryNodes = props.industries.map(function (industry) {
+
+		var imgSrc;
+		if (industry.resource == "wood") {
+			imgSrc = "/assets/img/wood.png";
+		}
+		if (industry.resource == "steel") {
+			imgSrc = "/assets/img/steel.png";
+		}
+		if (industry.resource == "power") {
+			imgSrc = "/assets/img/power.png";
+		}
+
 		return React.createElement(
 			"div",
 			{ key: industry._id, className: "industry", style: { backgroundColor: industry.color } },
-			React.createElement("img", { src: "/assets/img/domoface.jpeg", alt: "industry face", className: "industryFace" }),
+			React.createElement("img", { src: imgSrc, alt: "industry face", className: "industryFace" }),
 			React.createElement(
 				"h3",
 				{ className: "industryName" },
@@ -76,7 +99,29 @@ var IndustryList = function IndustryList(props) {
 				industry.name,
 				" "
 			),
-			"//",
+			React.createElement(
+				"h3",
+				{ className: "resource" },
+				" ",
+				industry.resource,
+				": ",
+				industry.resourceAmount,
+				" "
+			),
+			React.createElement(
+				"h3",
+				{ className: "resource" },
+				" Cost: ",
+				industry.cost,
+				" "
+			),
+			React.createElement(
+				"h3",
+				{ className: "resource" },
+				" Level: ",
+				industry.level,
+				" "
+			)
 		);
 	});
 

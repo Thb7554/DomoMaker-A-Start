@@ -27,11 +27,10 @@ const IndustryForm = (props) => {
 			<label htmlFor="name">Name: </label>
 			<input id="industryName" type="text" name="name" placeholder="Industry Name"/>
 			<label htmlFor="Type">Type: </label>
-			<input id="resource" type="text" name="resource"/>
-			<select id="resource">
-				<option value="Wood">Wood</option>
-				<option value="Steel">Steel</option>
-				<option value="Power">Power</option>
+			<select name="resource">
+				<option value="wood">Wood</option>
+				<option value="steel">Steel</option>
+				<option value="power">Power</option>
 			</select>
 			<input type="hidden" name="_csrf" value={props.csrf} />
 			<input className="makeIndustrySubmit" type="submit" value="Make Industry"/>
@@ -49,11 +48,22 @@ const IndustryList = function(props){
 	}
 	//#603912
 	const industryNodes = props.industries.map(function(industry){
+	
+		var imgSrc;
+		if(industry.resource == "wood"){
+			imgSrc = "/assets/img/wood.png";
+		}
+		if(industry.resource == "steel"){
+			imgSrc = "/assets/img/steel.png";
+		}
+		if(industry.resource == "power"){
+			imgSrc = "/assets/img/power.png";
+		}
+	
 		return(
 			<div key={industry._id} className="industry" style={{backgroundColor: industry.color}}>
-				<img src="/assets/img/domoface.jpeg" alt="industry face" className="industryFace" />
+				<img src={imgSrc} alt="industry face" className="industryFace" />
 				<h3 className="industryName"> Name: {industry.name} </h3>
-				<h3 className="resource"> Resource: {industry.resource} </h3>
 				<h3 className="resource"> {industry.resource}: {industry.resourceAmount} </h3>
 				<h3 className="resource"> Cost: {industry.cost} </h3>
 				<h3 className="resource"> Level: {industry.level} </h3>
