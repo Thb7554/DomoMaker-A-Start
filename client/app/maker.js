@@ -1,12 +1,13 @@
+var playerMoney;
+
 const handleIndustry = (e) => {
 	e.preventDefault();
 	
-	$("#industryMessage").animate({width:'hide'},350);
-	
 	if($("#industryName").val() == ''){
-		handleError("RAWR! All fields are required");
+		handleError("Factory needs a name!");
 		return false;
 	}
+
 	
 	sendAjax('POST', $("#industryForm").attr("action"), $("#industryForm").serialize(), function(){
 		loadIndustriesFromServer();
@@ -40,17 +41,19 @@ const IndustryForm = (props) => {
 	);
 };
 const AccountData = function(props){
-	if(props.account.money === null){
+	console.dir(props);
+	if(props.account.account.money === null){
 		return(
 			<div className="account">
 				<h3 className="emptyIndustry">Account not found!</h3>
 			</div>
 		);
 	}
+	playerMoney = props.account.account.money;
 	return(
-		<div key={props.account.username} className="account">
+		<div key={props.account.account.username} className="account">
 			<img src="/assets/img/money.png" alt="money" className="money" />
-			<h3> Money: {props.account.money} </h3>
+			<h3> Money: {props.account.account.money} </h3>
 		</div>
 	);
 }
@@ -97,6 +100,7 @@ const IndustryList = function(props){
 
 const loadAccountFromServer = () => {
 	sendAjax('GET','/getAccount',null,(data) => {
+		//console.dir(data);
 		ReactDOM.render(
 		<AccountData account={data} />, document.querySelector("#account")
 		);
@@ -119,6 +123,12 @@ const setup = function(csrf) {
 	ReactDOM.render(
 		<IndustryList industries={[]} />, document.querySelector("#industries")
 	);
+	
+	const account = {
+		account :{
+			money : 1000
+		}
+	};
 	
 	ReactDOM.render(
 		<AccountData account={account} />, document.querySelector("#account")

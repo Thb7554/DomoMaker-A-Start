@@ -1,12 +1,12 @@
 "use strict";
 
+var playerMoney;
+
 var handleIndustry = function handleIndustry(e) {
 	e.preventDefault();
 
-	$("#industryMessage").animate({ width: 'hide' }, 350);
-
 	if ($("#industryName").val() == '') {
-		handleError("RAWR! All fields are required");
+		handleError("Factory needs a name!");
 		return false;
 	}
 
@@ -62,7 +62,8 @@ var IndustryForm = function IndustryForm(props) {
 	);
 };
 var AccountData = function AccountData(props) {
-	if (props.account.money === null) {
+	console.dir(props);
+	if (props.account.account.money === null) {
 		return React.createElement(
 			"div",
 			{ className: "account" },
@@ -73,15 +74,16 @@ var AccountData = function AccountData(props) {
 			)
 		);
 	}
+	playerMoney = props.account.account.money;
 	return React.createElement(
 		"div",
-		{ key: props.account.username, className: "account" },
+		{ key: props.account.account.username, className: "account" },
 		React.createElement("img", { src: "/assets/img/money.png", alt: "money", className: "money" }),
 		React.createElement(
 			"h3",
 			null,
 			" Money: ",
-			props.account.money,
+			props.account.account.money,
 			" "
 		)
 	);
@@ -159,6 +161,7 @@ var IndustryList = function IndustryList(props) {
 
 var loadAccountFromServer = function loadAccountFromServer() {
 	sendAjax('GET', '/getAccount', null, function (data) {
+		//console.dir(data);
 		ReactDOM.render(React.createElement(AccountData, { account: data }), document.querySelector("#account"));
 	});
 };
@@ -173,6 +176,12 @@ var setup = function setup(csrf) {
 	ReactDOM.render(React.createElement(IndustryForm, { csrf: csrf }), document.querySelector("#makeIndustry"));
 
 	ReactDOM.render(React.createElement(IndustryList, { industries: [] }), document.querySelector("#industries"));
+
+	var account = {
+		account: {
+			money: 1000
+		}
+	};
 
 	ReactDOM.render(React.createElement(AccountData, { account: account }), document.querySelector("#account"));
 

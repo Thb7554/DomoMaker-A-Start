@@ -8,16 +8,20 @@ html, body {
 
 #logo {
     height: 40px;
-    width: 40;
-    padding-top: 5px;
+    width: auto;
+    padding-top: 25px;
+	padding-left: 25px;
     float:left;
     border-radius: 8px;
 }
 
 nav {
-    width: 100%;
-    height: 50px;
-    background-color: #55acee;
+	border: 2px dotted grey;
+	margin: auto;
+    width: 80%;
+    height: 100px;
+    background-color: #fff4e8;
+	min-width: 1000px;
 }
 
 nav:nth-child(1) {
@@ -26,11 +30,12 @@ nav:nth-child(1) {
 
 .navlink {
     padding: 5px;
-    padding-top: 12px;
+    padding-top: 25px;
     padding-left: 20px;
     color: white;
-    font-size: 1.3em;
-    float: left;
+    font-size: 2em;
+	float: left;
+	color: black;
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
@@ -38,24 +43,26 @@ nav:nth-child(1) {
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
-    transition: background-color 0.4s ease;
+    background-color: #dbb587;
+    transition: background-color 0.2s ease;
+	color: black;
+    transition: color 0.2s ease;
 }
 
 .navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    transition: background-color 0.2s ease;
+    background-color: white;
 }
 
 .industryForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 800px;
+	width: 80%;
+	margin: auto;
+    border: 2px dotted grey;
+    height: 50px;
     margin-top:0px;
     padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+    background-color: #fff4e8;
+	min-width: 1000px;
 }
 
 .industryForm label {
@@ -64,7 +71,7 @@ nav:nth-child(1) {
     margin-left: 10px;
     font-size: 1.2em;
     float: left;
-    color: white;
+    color: black;
 }
 
 .industryForm input[type=text] {
@@ -74,20 +81,22 @@ nav:nth-child(1) {
 .makeIndustrySubmit {
     transition: background-color 0.4s ease;
     display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
+    width: 150px;
+    background-color:  #dbb587;
+    color: black;
+    text-decoration: bold;
+	margin-left: 50px;
 }
 
 .makeIndustrySubmit:link, .makeIndustrySubmit:visited, .makeIndustrySubmit:hover, .makeIndustrySubmit:active {
-    color: white;
+    color: black;
 }
 
 .makeIndustrySubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+    transition: background-color 0.2s ease;
+    background-color: #fff4e8;
+	transition: color 0.2s ease;
+    color: black;
 }
 
 .mainForm {
@@ -118,7 +127,7 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 200px;
-    background-color: #55acee;
+    background-color: grey;
     border-radius: 2px;
     border-color: #66acee;
     padding: 3px 0px;
@@ -139,12 +148,13 @@ nav:nth-child(1) {
     text-align: center;
     font-size: 1.1em;
     width: 180px;
+	color: #dbb587;
     border-radius: 6px;
 }
 
 #user:focus, #pass:focus, #pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    box-shadow: 0px 0px 2px 2px #dbb587;
 }
 
 #industryMessage {
@@ -159,10 +169,10 @@ nav:nth-child(1) {
 }
 
 #industryMessage h3 {
-    width: 200px;
+    width: 80%;
+	margin: auto;
     position: absolute;
     top: 0px;
-    left: 20px;
 }
 
 #speech {
@@ -190,22 +200,34 @@ nav:nth-child(1) {
 }
 
 #industries {
-    width: 40%;
+    width: 80%;
     min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
+	background-color:  #fff4e8;
+    border: 2px dotted grey;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 20px;
+}
+
+.account {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 2px;
+    border: 2px solid #dbb587;
+    background-color: #dbb587;
+    padding: 10px;
+    min-height:60px;
+    overflow: hidden;
 }
 
 .industry {
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    /*background-color: #55acee;*/
+    border: 2px solid #dbb587;
+    
+    background-color: #dbb587;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
@@ -217,22 +239,22 @@ nav:nth-child(1) {
 }
 
 .industry:hover {
-    transition: border-color 0.2s ease-out;
+    transition: border-color 0.5s ease-out,
+				background-color .5s ease-out;
     border-color: rgba(255,255,255, 0.8);
+	background-color: white;
 }
 
 .industry:hover img{
 	transition: box-shadow .2s ease-out,
-				border-radius 1.2s ease-out;
-    box-shadow: 0px 0px 4px 4px #55acee;
-    border-radius: 50px;
+    box-shadow: 0px 0px 4px 4px #dbb587;
 }
 
 img.industryFace {
     margin-left: 25px;
     margin-right: 10px;
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: auto;
     border-radius: 4px;
     margin-top:10px;
     float:left;

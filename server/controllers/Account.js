@@ -57,6 +57,10 @@ const faqPage = (req, res) => {
   res.render('faq', { csrfToken: req.csrfToken() });
 };
 
+const premium = (req, res) => {
+  res.render('premium', { csrfToken: req.csrfToken() });
+};
+
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
@@ -95,11 +99,11 @@ const getToken = (request, response) => {
   res.json(csrfJSON);
 };
 
-const getAccount = (request, response) =>{
-	const req = request;
-	const res = response;
+const getAccount = (request, response) => {
+  const req = request;
+  const res = response;
 
-    return Account.AccountModel.findByUsername(req.session.account.username, (err, doc) => {
+  return Account.AccountModel.findByUsername(req.session.account.username, (err, doc) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occured' });
@@ -107,11 +111,12 @@ const getAccount = (request, response) =>{
 
     return res.json({ account: doc });
   });
-}
+};
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.faqPage = faqPage;
+module.exports.premium = premium;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
