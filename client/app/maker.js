@@ -15,6 +15,8 @@ const handleIndustry = (e) => {
 	return false;
 }
 
+
+
 const IndustryForm = (props) => {
 	return (
 		<form id="industryForm"
@@ -37,6 +39,21 @@ const IndustryForm = (props) => {
 		</form>
 	);
 };
+const AccountData = function(props){
+	if(props.account.money === null){
+		return(
+			<div className="account">
+				<h3 className="emptyIndustry">Account not found!</h3>
+			</div>
+		);
+	}
+	return(
+		<div key={props.account.username} className="account">
+			<img src="/assets/img/money.png" alt="money" className="money" />
+			<h3> Money: {props.account.money} </h3>
+		</div>
+	);
+}
 
 const IndustryList = function(props){
 	if(props.industries.length === 0){
@@ -78,6 +95,14 @@ const IndustryList = function(props){
 	);
 };
 
+const loadAccountFromServer = () => {
+	sendAjax('GET','/getAccount',null,(data) => {
+		ReactDOM.render(
+		<AccountData account={data} />, document.querySelector("#account")
+		);
+	});
+};
+
 const loadIndustriesFromServer = () => {
 	sendAjax('GET','/getIndustries',null,(data) => {
 		ReactDOM.render(
@@ -95,6 +120,13 @@ const setup = function(csrf) {
 		<IndustryList industries={[]} />, document.querySelector("#industries")
 	);
 	
+	ReactDOM.render(
+		<AccountData account={account} />, document.querySelector("#account")
+	);
+	
+
+	
+	loadAccountFromServer();
 	loadIndustriesFromServer();
 };
 

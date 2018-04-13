@@ -61,6 +61,31 @@ var IndustryForm = function IndustryForm(props) {
 		React.createElement("input", { className: "makeIndustrySubmit", type: "submit", value: "Make Industry" })
 	);
 };
+var AccountData = function AccountData(props) {
+	if (props.account.money === null) {
+		return React.createElement(
+			"div",
+			{ className: "account" },
+			React.createElement(
+				"h3",
+				{ className: "emptyIndustry" },
+				"Account not found!"
+			)
+		);
+	}
+	return React.createElement(
+		"div",
+		{ key: props.account.username, className: "account" },
+		React.createElement("img", { src: "/assets/img/money.png", alt: "money", className: "money" }),
+		React.createElement(
+			"h3",
+			null,
+			" Money: ",
+			props.account.money,
+			" "
+		)
+	);
+};
 
 var IndustryList = function IndustryList(props) {
 	if (props.industries.length === 0) {
@@ -132,6 +157,12 @@ var IndustryList = function IndustryList(props) {
 	);
 };
 
+var loadAccountFromServer = function loadAccountFromServer() {
+	sendAjax('GET', '/getAccount', null, function (data) {
+		ReactDOM.render(React.createElement(AccountData, { account: data }), document.querySelector("#account"));
+	});
+};
+
 var loadIndustriesFromServer = function loadIndustriesFromServer() {
 	sendAjax('GET', '/getIndustries', null, function (data) {
 		ReactDOM.render(React.createElement(IndustryList, { industries: data.industries }), document.querySelector("#industries"));
@@ -143,6 +174,9 @@ var setup = function setup(csrf) {
 
 	ReactDOM.render(React.createElement(IndustryList, { industries: [] }), document.querySelector("#industries"));
 
+	ReactDOM.render(React.createElement(AccountData, { account: account }), document.querySelector("#account"));
+
+	loadAccountFromServer();
 	loadIndustriesFromServer();
 };
 

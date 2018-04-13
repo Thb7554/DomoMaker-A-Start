@@ -31,6 +31,7 @@ const AccountSchema = new mongoose.Schema({
   money: {
     type: Number,
     required: true,
+	value: 1000,
   },
 });
 
