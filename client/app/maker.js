@@ -3,11 +3,14 @@ var playerMoney;
 const handleIndustry = (e) => {
 	e.preventDefault();
 	
+	console.dir(playerMoney);
+
+	makeTransactionServer();
 	if($("#industryName").val() == ''){
 		handleError("Factory needs a name!");
 		return false;
 	}
-
+	
 	
 	sendAjax('POST', $("#industryForm").attr("action"), $("#industryForm").serialize(), function(){
 		loadIndustriesFromServer();
@@ -40,8 +43,9 @@ const IndustryForm = (props) => {
 		</form>
 	);
 };
+
 const AccountData = function(props){
-	console.dir(props);
+	//console.dir(props);
 	if(props.account.account.money === null){
 		return(
 			<div className="account">
@@ -98,8 +102,18 @@ const IndustryList = function(props){
 	);
 };
 
+const makeTransactionServer = (cost) =>{
+	sendAjax('POST','/makeTransaction', cost, function(){
+		//console.dir(data);
+		ReactDOM.render(
+		<AccountData account={data} />, document.querySelector("#account")
+		);
+	});
+};
+
 const loadAccountFromServer = () => {
 	sendAjax('GET','/getAccount',null,(data) => {
+		playerMoney = data;
 		//console.dir(data);
 		ReactDOM.render(
 		<AccountData account={data} />, document.querySelector("#account")
@@ -126,7 +140,7 @@ const setup = function(csrf) {
 	
 	const account = {
 		account :{
-			money : 1000
+			money : 0
 		}
 	};
 	

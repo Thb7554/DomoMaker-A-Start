@@ -5,6 +5,9 @@ var playerMoney;
 var handleIndustry = function handleIndustry(e) {
 	e.preventDefault();
 
+	console.dir(playerMoney);
+
+	makeTransactionServer();
 	if ($("#industryName").val() == '') {
 		handleError("Factory needs a name!");
 		return false;
@@ -61,8 +64,9 @@ var IndustryForm = function IndustryForm(props) {
 		React.createElement("input", { className: "makeIndustrySubmit", type: "submit", value: "Make Industry" })
 	);
 };
+
 var AccountData = function AccountData(props) {
-	console.dir(props);
+	//console.dir(props);
 	if (props.account.account.money === null) {
 		return React.createElement(
 			"div",
@@ -159,8 +163,16 @@ var IndustryList = function IndustryList(props) {
 	);
 };
 
+var makeTransactionServer = function makeTransactionServer(cost) {
+	sendAjax('POST', '/makeTransaction', cost, function () {
+		//console.dir(data);
+		ReactDOM.render(React.createElement(AccountData, { account: data }), document.querySelector("#account"));
+	});
+};
+
 var loadAccountFromServer = function loadAccountFromServer() {
 	sendAjax('GET', '/getAccount', null, function (data) {
+		playerMoney = data;
 		//console.dir(data);
 		ReactDOM.render(React.createElement(AccountData, { account: data }), document.querySelector("#account"));
 	});
@@ -179,7 +191,7 @@ var setup = function setup(csrf) {
 
 	var account = {
 		account: {
-			money: 1000
+			money: 0
 		}
 	};
 

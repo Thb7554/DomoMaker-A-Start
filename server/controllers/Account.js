@@ -113,6 +113,11 @@ const getAccount = (request, response) => {
   });
 };
 
+const makeTransaction = (req, res) => {
+	Account.AccountModel.findByUsername(req.session.account.username).money -= 100;
+	return null;
+};
+
 module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.faqPage = faqPage;
@@ -121,3 +126,4 @@ module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
 module.exports.getAccount = getAccount;
+module.exports.makeTransaction = makeTransaction;
