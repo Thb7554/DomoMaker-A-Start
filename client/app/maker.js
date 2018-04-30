@@ -38,7 +38,7 @@ const IndustryForm = (props) => {
 				<option value="power">Power</option>
 			</select>
 			<input type="hidden" name="_csrf" value={props.csrf} />
-			<input type="hidden" name="price" value=100}/>
+			<input type="hidden" name="price" value="100"/>
 			<input className="makeIndustrySubmit" type="submit" value="Make Industry"/>
 		</form>
 	);

@@ -1,30 +1,31 @@
 "use strict";
 
-var changePassword = function changePassword(e) {
+var handlePassword = function handlePassword(e) {
 	e.preventDefault();
-
-	if ($("#pass3").val() != $("#pass4").val()) {
-		handleError("Passwords do not match!");
-		return false;
-	}
 
 	if ($("#pass3").val() == "" || $("#pass4").val() == "") {
 		handleError("All fields are required!");
 		return false;
 	}
 
-	sendAjax('POST', $("#passForm").attr("action"), $("#passForm").serialize(), function () {
+	if ($("#pass3").val() != $("#pass4").val()) {
+		handleError("Passwords do not match!");
+		return false;
+	}
+
+	sendAjax('POST', $("#changeForm").attr("action"), $("#changeForm").serialize(), function () {
 		console.log("Changed!");
 	});
+
 	return false;
 };
 
 var PasswordForm = function PasswordForm(props) {
 	return React.createElement(
 		"form",
-		{ id: "passForm",
-			onSubmit: changePassword,
-			name: "passForm",
+		{ id: "changeForm",
+			onSubmit: handlePassword,
+			name: "changeForm",
 			action: "/changePassword",
 			method: "POST",
 			className: "changeForm"

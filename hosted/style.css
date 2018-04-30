@@ -174,6 +174,37 @@ nav:nth-child(1) {
     box-shadow: 0px 0px 2px 2px #dbb587;
 }
 
+#flyingAd{
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	width: 220px;
+	height: 220px;
+	border: 2px solid black;
+	background-color: darkGrey;
+}
+
+#innerFlyingAd{
+	width: 90%;
+	height: 90%;
+	margin: 5%;
+}
+
+#bannerAd{
+	width: 100%;
+	margin-top: 20px;
+}
+
+#close{
+	position: fixed;
+	bottom: 250px;
+	right: 50px;
+	height: 20px;
+	width: 20px;
+	border: 2px solid black;
+}
+
+
 #industryMessage {
     display:none;
     top: 250px;

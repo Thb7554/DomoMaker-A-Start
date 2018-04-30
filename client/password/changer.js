@@ -1,19 +1,22 @@
-const changePassword = (e) => {
+const handlePassword = (e) => {
 	e.preventDefault();
+	
+	if($("#pass3").val() == "" || $("#pass4").val() == "" ){
+		handleError("All fields are required!");
+		return false;
+	}
 	
 	if($("#pass3").val() != $("#pass4").val()){
 		handleError("Passwords do not match!");
 		return false;
 	}
 
-	if($("#pass3").val() == "" || $("#pass4").val() == "" ){
-		handleError("All fields are required!");
-		return false;
-	}
+
 	
-	sendAjax('POST', $("#passForm").attr("action"), $("#passForm").serialize(), function(){
+	sendAjax('POST', $("#changeForm").attr("action"), $("#changeForm").serialize(), function(){
 		console.log("Changed!");
 	});
+	
 	return false;
 }
 
@@ -21,9 +24,9 @@ const changePassword = (e) => {
 
 const PasswordForm = (props) => {
 	return (
-		<form id="passForm"
-			  onSubmit={changePassword}
-			  name="passForm"
+		<form id="changeForm"
+			  onSubmit={handlePassword}
+			  name="changeForm"
 			  action="/changePassword"
 			  method="POST"
 			  className="changeForm"

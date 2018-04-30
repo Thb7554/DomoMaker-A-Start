@@ -68,7 +68,7 @@ const changePasswordPage = (req, res) => {
 const changePassword = (request, response) => {
   const req = request;
   const res = response;
-
+  
   if (!req.body.pass3 || !req.body.pass4) {
     return res.status(400).json({ error: 'Missing a new password!' });
   }
