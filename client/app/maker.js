@@ -4,8 +4,7 @@ const handleIndustry = (e) => {
 	e.preventDefault();
 	
 	console.dir(playerMoney);
-
-	makeTransactionServer();
+	
 	if($("#industryName").val() == ''){
 		handleError("Factory needs a name!");
 		return false;
@@ -39,6 +38,7 @@ const IndustryForm = (props) => {
 				<option value="power">Power</option>
 			</select>
 			<input type="hidden" name="_csrf" value={props.csrf} />
+			<input type="hidden" name="price" value=100}/>
 			<input className="makeIndustrySubmit" type="submit" value="Make Industry"/>
 		</form>
 	);
@@ -102,15 +102,6 @@ const IndustryList = function(props){
 	);
 };
 
-const makeTransactionServer = (cost) =>{
-	sendAjax('POST','/makeTransaction', cost, function(){
-		//console.dir(data);
-		ReactDOM.render(
-		<AccountData account={data} />, document.querySelector("#account")
-		);
-	});
-};
-
 const loadAccountFromServer = () => {
 	sendAjax('GET','/getAccount',null,(data) => {
 		playerMoney = data;
@@ -137,7 +128,7 @@ const setup = function(csrf) {
 	ReactDOM.render(
 		<IndustryList industries={[]} />, document.querySelector("#industries")
 	);
-	
+
 	const account = {
 		account :{
 			money : 0
@@ -149,7 +140,6 @@ const setup = function(csrf) {
 	);
 	
 
-	
 	loadAccountFromServer();
 	loadIndustriesFromServer();
 };

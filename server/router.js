@@ -6,7 +6,9 @@ const router = (app) => {
   app.get('/getIndustries', mid.requiresLogin, controllers.Industry.getIndustries);
   app.get('/getAccount', mid.requiresLogin, controllers.Account.getAccount);
   app.post('/makeTransaction', mid.requiresLogin, controllers.Account.makeTransaction);
-  app.get('/premium', mid.requiresSecure, controllers.Account.premium);
+  app.get('/premium', mid.requiresLogin, controllers.Account.premium);
+  app.get('/changePassword', mid.requiresLogin, controllers.Account.changePasswordPage);
+  app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);

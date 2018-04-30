@@ -12,11 +12,11 @@ const signup = (request, response) => {
   req.body.money = 1000;
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required!' });
   }
 
   if (req.body.pass !== req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! Passwords do no match' });
+    return res.status(400).json({ error: 'Passwords do not match!' });
   }
 
   return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => {
@@ -40,7 +40,7 @@ const signup = (request, response) => {
       console.log(err);
 
       if (err.code === 11000) {
-        return res.status(400).json({ error: 'Username alreasdy in use.' });
+        return res.status(400).json({ error: 'Username already in use.' });
       }
 
       return res.status(400).json({ error: 'An error occurred' });
@@ -59,6 +59,41 @@ const faqPage = (req, res) => {
 
 const premium = (req, res) => {
   res.render('premium', { csrfToken: req.csrfToken() });
+};
+
+const changePasswordPage = (req, res) => {
+  res.render('changePassword', { csrfToken: req.csrfToken() });
+};
+
+const changePassword = (request, response) => {
+  const req = request;
+  const res = response;
+
+  if (!req.body.pass3 || !req.body.pass4) {
+    return res.status(400).json({ error: 'Missing a new password!' });
+  }
+  if (req.body.pass3 !== req.body.pass4) {
+    return res.status(400).json({ error: 'Passwords do not match!' });
+  }
+  const newPassword = `${req.body.pass3}`;
+
+  const savePromise = req.session.account.save();
+
+  savePromise.then(() => res.json({
+    username: req.session.account.username,
+    salt: req.session.account.salt,
+    password: newPassword,
+    createdData: req.session.account.createdData,
+    money: req.session.account.money,
+  }));
+
+  savePromise.catch((err) => {
+      console.log(err);
+
+      return res.status(400).json({ error: 'An error occurred' });
+    });
+
+  return res;
 };
 
 const logout = (req, res) => {
@@ -116,14 +151,25 @@ const getAccount = (request, response) => {
 const makeTransaction = (request, response) => {
   const req = request;
   const res = response;
-  Account.AccountModel.findByUsername(req.session.account.username).money -= 100;
-  return res.json({});
+  Account.money--;
+
+  const savePromise = Account.save();
+
+  savePromise.then(() => res.json({ username: req.session.account.username,
+    salt: req.session.account.salt,
+    password: req.session.account.password,
+    createdData: req.session.account.createdData,
+    money: req.session.account.money }));
+
+  savePromise((err) => res.json({ err }));
 };
 
 module.exports.loginPage = loginPage;
 module.exports.login = login;
 module.exports.faqPage = faqPage;
 module.exports.premium = premium;
+module.exports.changePasswordPage = changePasswordPage;
+module.exports.changePassword = changePassword;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
